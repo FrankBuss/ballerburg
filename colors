@@ -1,0 +1,16 @@
+#define BackgroundR 0
+#define BackgroundG 0
+#define BackgroundB 65535
+
+#define TerrainR 0
+#define TerrainG 65535
+#define TerrainB 0
+
+#define ExplosionR 65535
+#define ExplosionG 0
+#define ExplosionB 0
+
+#define ObjectR 65535
+#define ObjectG 65535
+#define ObjectB 65535
+

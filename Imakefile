@@ -1,0 +1,20 @@
+#
+# example programs Imakefile
+#
+#
+
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)`
+
+SRCS1=	main.c bfield.c castles.c input.c initx.c oninit.c ongame.c random.c \
+        sleepms.c net.c sound.c
+OBJS1=	main.o bfield.o castles.o input.o initx.o oninit.o ongame.o random.o \
+        sleepms.o net.o sound.o
+PROGRAMS = bb
+
+all::  $(PROGRAMS)
+
+LOCAL_LIBRARIES = $(XLIB)
+
+SYS_LIBRARIES = -lm
+
+NormalProgramTarget(bb,$(OBJS1),,$(LOCAL_LIBRARIES),)

@@ -1,0 +1,96 @@
+Ballerburg V1.0
+===============
+
+Copyright 9/1996 Frank Buss
+
+Ballerburg ist eine Umsetzung eines QBasic-Spiels fuer X11 unter Linux.
+
+
+Installationsanleitung:
+=======================
+
+1. bb am besten nach /usr/local/lib/bb entpacken (z.B. mit
+   'cd /usr/local/lib; tar -xzf ~/bb.tgz')
+2. ggf. sound.h aendern, falls die Samples woanders als in /usr/local/lib/bb
+   stehen
+3. 'xmkmf' starten, damit ein Makefile erzeugt wird
+4. 'make' zum compilieren starten
+5. mit 'ln -s /usr/local/lib/bb/bb /usr/bin/bb' ein Link legen, oder 'bb'
+   in ein Verzeichnis kopieren, das im Pfad steht
+6. zur Soundunterstuetzung muss das Device '/dev/audio' installiert sein
+
+
+Starten des Spiels, Kommandlineoptionen:
+========================================
+
+Mit 'bb' startet man Ballerburg als Standalone. Das Spiel benoetigt nur
+diese eine Programm. Es kann ohne Probleme nach /usr/bin kopiert werden,
+oder ein Link von da gelegt werden.
+
+'bb -h' zeigt eine Uebersicht ueber folgende Kommandlineoptionen:
+
+-h
+zeigt die Hilfe an
+
+-r Nummer
+Zufall in Prozent fuer die Plazierung der Burgen. Bei 0 Prozent sind die
+Abstaende alle gleich, bei 100 Prozent werden die Burgen stark zufaellig
+plaziert.
+
+-d Nummer
+Verzoegerunszeit in Millisekunden einstellen. Wird z.B. beim Zeichnen des
+Kanonenfluges oder bei der Explosion gebraucht. Mit einem Wert von 0 stellt
+man die Zeitverzoegerung aus.
+
+-m Nummer
+Soundmodus einstellen. 0=kein Sound, 1=XBeep, 2=/dev/audio fuer Samples
+benutzen.
+
+-g Nummer
+Spielmodus einstellen. Bei 0 werden die Anzahl ueberlebter Runden gezaehlt,
+bei 1 bekommt ein Spieler fuer jeden Abschuss (Eigentreffer zaehlen nicht :-) )
+ein Punkt.
+
+-a Nummer
+Groesse des Kraters bei Explosion einer Burg festlegen.
+
+-o Nummer
+Groesse des Kraters bei Explosion im Berg festlegen.
+
+-p Nummer
+Durchlaessigkeit des Berges festlegen. Hoehere Werte bedeuten eine groessere
+Durchlaessigkeit.
+
+-c server
+Spiel als Client starten. 'server' ist hierbei der Name des Computer, auf
+dem der Server laeuft. Z.B. 'bb -c esb.mbis.de'.
+
+-s c r
+Spiel als Server starten. 'c' legt die Anzahl Clients fest, die sich
+einloggen und r die Anzahl Runden. Im Serverbetrieb werden die Optionen
+'-a', '-o' und '-p' vom Server an alle Clienten uebertragen.
+
+
+Spielanleitung:
+===============
+
+Jeder Spieler hat eine Burg, von der er auf die anderen Burgen schiessen
+kann. Nacheinander schiessen alle Spieler durch Eingabe des Winkels und der
+Staerke des Schusses und versuchen die anderen Burgen zu treffen. Die
+Spielerreihenfolge wird jede Runde neu zufaellig ausgewaehlt. Eine Runde ist
+zuende, wenn nur noch ein Spieler lebt. Der Winkel wird in Grad eingegeben,
+wobei 0 Grad waagerecht nach links oder nach rechts heisst. Durch 'l' oder
+'r' kann man die Richtung bestimmen. 'L+45' heisst also schraeg nach links
+oben. Durch '+' und '-' kann man die vertikale Richtung aendern. 'R-45'
+heisst also schraeg nach rechts unten schiessen.
+
+Am Ende des Spiels werden die Punkte angezeigt. Einen Punkt bekommt immer
+der, der eine Runde als einziger ueberlebt hat.
+
+
+Anmerkung:
+==========
+
+Da das Spiel noch ein Beta-Release ist, bitte Fehlerreports an
+frank@esb.mbis.de.
+
