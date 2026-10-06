@@ -271,6 +271,6 @@ int main(int argc, char **argv)
 	        XFreeGC(display,gc);
 	}
         if (display) XCloseDisplay(display);
-	kill(id,SIGTERM);
+	if (id) kill(id,SIGTERM);  /* kill(0) wuerde die ganze Prozessgruppe beenden */
         return 1;
 }

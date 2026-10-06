@@ -24,15 +24,18 @@ void play(char *name)
                 XBell(display,100);
 		break;
 	    case 2:
-                if (lstat("/dev/audio",&stat_buf)<0) return;
-                if (S_ISCHR(stat_buf.st_mode)) {
+                if (lstat(name,&stat_buf)<0) return;
+                if (S_ISREG(stat_buf.st_mode)) {
 	                if (id>0) {
 		                kill(id,SIGTERM);
 			        wait(&statloc);
 		        }
 	                if ((id=fork())<0) return; else {
 	                        if (id==0) {
-		                        if (execlp("cp","cp",name,"/dev/audio",NULL)<0) {
+		                        /* /dev/audio gibt es nicht mehr */
+		                        execlp("paplay","paplay",name,NULL);
+		                        execlp("pw-play","pw-play",name,NULL);
+		                        if (execlp("aplay","aplay","-q",name,NULL)<0) {
                                                 #ifdef DEBUG
 			                        fprintf(stderr,"play: execlp error: %d");
 				                perror(NULL);

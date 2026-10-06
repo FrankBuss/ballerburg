@@ -309,8 +309,10 @@ void OnGame()
 	        break;
 	    case GAME_END:
 	        end=1;
-		ClearBuf('e');
-		MyWrite(Sock);
-		close(Sock);
+		if (client) {  /* ohne Server ist Sock 0, also stdin */
+		        ClearBuf('e');
+		        MyWrite(Sock);
+		        close(Sock);
+		}
 	}
 }

@@ -1,3 +1,54 @@
+# Ballerburg (1996)
+
+Ballerburg V1.0 from 1996: a two-player (up to four) artillery game for X11,
+written in C with raw Xlib calls, with network play over TCP sockets
+(one player runs the server, the others connect as clients).
+
+![Ballerburg](ballerburg.gif)
+
+## Compiling on a modern system (2026)
+
+You need a C compiler, `make`, the Xlib headers and the classic `9x15` X font:
+
+    # Debian / Ubuntu
+    sudo apt install build-essential libx11-dev xfonts-base
+    # Fedora
+    sudo dnf install gcc make libX11-devel xorg-x11-fonts-misc
+    # Arch
+    sudo pacman -S base-devel libx11 xorg-fonts-misc
+
+    make
+    ./bb
+
+`xmkmf`/`imake` from the original instructions are usually gone, so there is
+a plain `Makefile` now. Sound is played with `paplay`, `pw-play` or `aplay`
+(PulseAudio, PipeWire or ALSA). The samples are taken from the build
+directory; use e.g. `make SOUNDDIR=/usr/local/lib/bb` if you put them
+somewhere else. `./bb -m 0` turns sound off.
+
+Network game: start the server with `./bb -s 2 3` (2 clients, 3 rounds), then
+`./bb -c servername` on each client. The server uses TCP port 16705.
+
+Changes to the 1996 code, kept as small as possible:
+
+- new `Makefile`, compiling as C89 (`-std=gnu89 -fcommon`) so the old code
+  builds unchanged with current GCC
+- sound: plays the samples with a sound player instead of copying them to
+  `/dev/audio`; sample directory configurable
+- fixed `kill(0)` at exit in standalone mode (could terminate the parent
+  process group) and a write to stdin at the end of a standalone game
+- the original 1996 binary is kept as `bb-1996-linux-i386`
+
+Known quirks from 1996, left as they are: in client mode the helper process
+busy-waits while a shot is animated (this was the "Ruckeln" bug on the
+single-CPU machines back then), and the server keeps spinning if a client
+quits in the middle of a game (stop it with Ctrl-C).
+
+## Original README (September 1996, German)
+
+The following is the unchanged README.
+
+```
 Ballerburg V1.0
 ===============
 
@@ -94,3 +145,4 @@ Anmerkung:
 Da das Spiel noch ein Beta-Release ist, bitte Fehlerreports an
 frank@esb.mbis.de.
 
+```
